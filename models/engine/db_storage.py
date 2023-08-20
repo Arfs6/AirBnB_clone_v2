@@ -29,12 +29,18 @@ class DBStorage:
         cls: If not None, return only instance of this class
         returns: dictionary of objects name as keys and objects as values.
         """
+        from .. import allModels
+        allObjs = list()
         if cls:
-            query = self.__session.query(cls)
+            allObjs = self.__session.query(cls).all()
         else:
-            query = self.__session.query('State')
+            for modelName, model in allModels.items():
+                # This should be deleted when all models are sqlalchemy table
+                if modelName not in ['State', 'City']:
+                    continue
+                allObjs += self.__session.query(model).all()
 
-        return {f"{obj.__class__.__name__}.{obj.id}" for obj in query.all()}
+        return {f"{obj.__class__.__name__}.{obj.id}": obj for obj in allObjs}
 
     def new(self, obj):
         """Add `obj` to session."""
