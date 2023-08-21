@@ -61,7 +61,7 @@ class FileStorage:
         """
         if not obj:
             return
-        key = obj.__class__.__name__ +'.' + obj.id
+        key = obj.__class__.__name__ + '.' + obj.id
         allObjs = self.all()
         if key in allObjs:
             del allObjs[key]

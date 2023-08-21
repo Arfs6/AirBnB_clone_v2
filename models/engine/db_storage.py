@@ -36,7 +36,7 @@ class DBStorage:
         else:
             for modelName, model in allModels.items():
                 # This should be deleted when all models are sqlalchemy table
-                if modelName not in ['State', 'City']:
+                if modelName not in ['State', 'City', 'User']:
                     continue
                 allObjs += self.__session.query(model).all()
 
