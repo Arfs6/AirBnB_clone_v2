@@ -3,13 +3,12 @@
 
 from os import getenv
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, scoped_session, Session as SessionType
-
+from sqlalchemy.orm import sessionmaker, scoped_session
 
 class DBStorage:
     """An abstraction of the database"""
     __engine = None
-    __session: SessionType = None
+    __session = None
 
     def __init__(self):
         """Initialize database engine, session and all other necessary attributes"""
@@ -29,15 +28,11 @@ class DBStorage:
         cls: If not None, return only instance of this class
         returns: dictionary of objects name as keys and objects as values.
         """
-        from .. import allModels
         allObjs = list()
         if cls:
             allObjs = self.__session.query(cls).all()
         else:
-            for modelName, model in allModels.items():
-                # This should be deleted when all models are sqlalchemy table
-                if modelName not in ['State', 'City', 'User']:
-                    continue
+            for model in self.allModels.values():
                 allObjs += self.__session.query(model).all()
 
         return {f"{obj.__class__.__name__}.{obj.id}": obj for obj in allObjs}
@@ -58,6 +53,20 @@ class DBStorage:
         """Creates all tables.
         """
         from ..base_model import Base
+        from ..state import State
+        from..city import City
+        from ..review import Review
+        from ..amenity import Amenity
+        from ..user import User
+        from ..place import Place
+        self.allModels = {
+                # 'Amenity': Amenity,
+                'City': City,
+                'Place': Place,
+                # 'Review': Review,
+                'State': State,
+                'User': User,
+                }
         Base.metadata.create_all(self.__engine)
         SessionFactory = sessionmaker(
                 bind=self.__engine, expire_on_commit=False, 
