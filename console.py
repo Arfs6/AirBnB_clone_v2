@@ -265,7 +265,13 @@ class HBNBCommand(cmd.Cmd):
             for k, v in storage.all().items():
                 print_list.append(str(v))
 
-        print(print_list)
+        string = '['
+        for idx, obj in enumerate(print_list):
+            if idx > 0:
+                string += ' '
+            string += obj
+        string += ']'
+        print(string)
 
     def help_all(self):
         """ Help information for the all command """
