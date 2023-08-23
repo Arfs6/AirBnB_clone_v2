@@ -173,7 +173,7 @@ class HBNBCommand(cmd.Cmd):
             # found quotes with no \ preceeding it
             value = string[:quoteIndex]
             remaining = string[quoteIndex + 1:] if not eol else ""
-            return value, remaining
+            return value.replace('_', ' '), remaining
 
         # couldn't figure out type.
         return None, string.partition(' ')[2]

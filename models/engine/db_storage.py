@@ -55,15 +55,15 @@ class DBStorage:
         from ..base_model import Base
         from ..state import State
         from..city import City
-        from ..review import Review
-        from ..amenity import Amenity
         from ..user import User
+        from ..review import Review
         from ..place import Place
+        from ..amenity import Amenity
         self.allModels = {
-                # 'Amenity': Amenity,
+                'Amenity': Amenity,
                 'City': City,
                 'Place': Place,
-                # 'Review': Review,
+                'Review': Review,
                 'State': State,
                 'User': User,
                 }

@@ -6,6 +6,9 @@ from sqlalchemy.orm import relationship
 from models.base_model import BaseModel, Base
 
 
+State = None
+
+
 class City(BaseModel, Base):
     """ The city class, contains state ID and name """
     __tablename__ = 'cities'
@@ -15,3 +18,9 @@ class City(BaseModel, Base):
     # relationships
     state = relationship('State', back_populates='cities')
     places = relationship('Place', back_populates='cities', cascade='all, delete-orphan')
+
+    def __init__(self, *args, **kwargs):
+        """Initialize City mapper"""
+        global State
+        from .state import State
+        super().__init__(*args, **kwargs)
