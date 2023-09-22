@@ -12,6 +12,12 @@ City = None
 
 class State(BaseModel, Base):
     """ State class """
+
+    def __init__(self, *args, **kwargs):
+        """Initialize table attrs"""
+        global City
+        from .city import City
+        super().__init__(*args, **kwargs)
     __tablename__ = 'states'
     name = Column(String(128), nullable=False)
     if isDBStorage:
@@ -24,9 +30,3 @@ class State(BaseModel, Base):
             allModels = getAllModels()
             allCities = storage.all(allModels['City']).values()
             return [c for c in allCities if c.state_id == self.id]
-
-    def __init__(self, *args, **kwargs):
-        """Initialize table attrs"""
-        global City
-        from .city import City
-        super().__init__(*args, **kwargs)

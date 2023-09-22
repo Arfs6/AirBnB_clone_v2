@@ -72,8 +72,10 @@ class DBStorage:
                 bind=self.__engine, expire_on_commit=False, 
                 )
         Session = scoped_session(SessionFactory)
+        self.Session = Session
         self.__session = Session()
 
     def close(self):
         """Get a new session object."""
-        self.__session.remove()
+        self.__session.close()
+        self.__session = self.Session()
