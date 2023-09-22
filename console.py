@@ -167,7 +167,8 @@ class HBNBCommand(cmd.Cmd):
             if quoteIndex == -1:  # not found
                 break
             elif string[quoteIndex - 1] == '\\':  # '\' preceeds '"'
-                if eol: break
+                if eol:
+                    break
                 start = quoteIndex + 1
                 continue
             # found quotes with no \ preceeding it

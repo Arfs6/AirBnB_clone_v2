@@ -5,13 +5,15 @@ from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 
+
 class DBStorage:
     """An abstraction of the database"""
     __engine = None
     __session = None
 
     def __init__(self):
-        """Initialize database engine, session and all other necessary attributes"""
+        """Initialize database engine,
+        session and all other necessary attributes"""
         user = getenv('HBNB_MYSQL_USER')
         password = getenv('HBNB_MYSQL_PWD')
         db = getenv('HBNB_MYSQL_DB')
@@ -69,7 +71,7 @@ class DBStorage:
                 }
         Base.metadata.create_all(self.__engine)
         SessionFactory = sessionmaker(
-                bind=self.__engine, expire_on_commit=False, 
+                bind=self.__engine, expire_on_commit=False,
                 )
         Session = scoped_session(SessionFactory)
         self.Session = Session

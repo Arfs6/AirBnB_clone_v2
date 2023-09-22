@@ -25,7 +25,7 @@ def do_pack():
     # Use tar to create the archive from the web_static folder
     local("tar -czvf {} {}".format(local_archive_path, local_web_static_path))
 
-     # Check if the archive was created successfully
+    # Check if the archive was created successfully
     if os.path.exists(local_archive_path):
         return local_archive_path
     return None

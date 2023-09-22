@@ -48,7 +48,7 @@ class TestState(unittest.TestCase):
 
     def test_clsCommonAttributes(self):
         """Test all the common class attributes"""
-        self.assertTrue(State.name.nullable == False)
+        self.assertTrue(not State.name.nullable)
 
 
 if __name__ == '__main__':

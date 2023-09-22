@@ -11,6 +11,8 @@ else:
     from .engine.file_storage import FileStorage
     storage = FileStorage()
 storage.reload()
+
+
 def getAllModels():
     """Returns all the models"""
     from .state import State
