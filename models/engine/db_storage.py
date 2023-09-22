@@ -73,3 +73,7 @@ class DBStorage:
                 )
         Session = scoped_session(SessionFactory)
         self.__session = Session()
+
+    def close(self):
+        """Get a new session object."""
+        self.__session.remove()

@@ -65,3 +65,7 @@ class FileStorage:
         allObjs = self.all()
         if key in allObjs:
             del allObjs[key]
+
+    def close(self):
+        """Reload the storage"""
+        self.reload()
