@@ -31,9 +31,6 @@ def listStates():
     states.sort(key=sortKey)
     #sort all cities
     for state in states:
-        if state.cities is None:
-            state.cities = []
-            break
         state.cities.sort(key=sortKey)
     return render_template('8-cities_by_states.html', states=states)
 
